@@ -133,9 +133,14 @@ jobs:
           TYPE: server
           DB: 'mariadb'
 
+      - name: Setup tmate session
+        if: ${{ always() }}
+        uses: mxschmitt/action-tmate@v3
+
       - name: Run Tests
         run: bench --site test_site run-parallel-tests
         working-directory: /home/runner/frappe-bench
+
 
       - name: Show bench output
         if: ${{ always() }}
